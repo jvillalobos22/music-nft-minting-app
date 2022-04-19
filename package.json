@@ -11,10 +11,31 @@
   "dependencies": {
     "next": "12.1.5",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "@nomiclabs/hardhat-ethers": "^2.0.5",
+    "@openzeppelin/contracts": "^4.5.0",
+    "axios": "^0.26.1",
+    "ethers": "^5.6.4",
+    "hardhat": "^2.9.3",
+    "ipfs-http-client": "^56.0.2"
   },
   "devDependencies": {
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "autoprefixer": "^10.4.4",
+    "chai": "^4.3.6",
     "eslint": "8.13.0",
-    "eslint-config-next": "12.1.5"
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "12.1.5",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "ethereum-waffle": "^4.0.0",
+    "postcss": "^8.4.12",
+    "prettier": "^2.6.2",
+    "tailwindcss": "^3.0.24"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
   }
 }
