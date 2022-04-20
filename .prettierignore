@@ -1,7 +1,9 @@
 # Ignore artifacts:
 build
 coverage
+.next
 node_modules
 artifacts
-.next
 cache
+coverage*
+gasReporterOutput.json

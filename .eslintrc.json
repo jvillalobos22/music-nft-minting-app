@@ -1,9 +1,29 @@
 {
   "extends": ["next/core-web-vitals", "eslint:recommended", "airbnb"],
   "rules": {
-    "jsx-quotes": ["error", "prefer-double"],
+    "jsx-quotes": [
+      "error",
+      "prefer-double",
+      "standard",
+      "plugin:node/recommended"
+    ],
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/react-in-jsx-scope": "off"
-  }
+  },
+  "env": {
+    "browser": false,
+    "es2021": true,
+    "mocha": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 12
+  },
+  "overrides": [
+    {
+      "files": ["hardhat.config.js"],
+      "globals": { "task": true }
+    }
+  ]
 }
