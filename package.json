@@ -22,7 +22,6 @@
     "hardhat-gas-reporter": "^1.0.8",
     "ipfs-http-client": "^56.0.2",
     "next": "12.1.5",
-    "prettier-plugin-solidity": "^1.0.0-beta.19",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "solhint": "^3.3.7",
@@ -40,11 +39,25 @@
     "ethereum-waffle": "^4.0.0",
     "postcss": "^8.4.12",
     "prettier": "^2.6.2",
+    "prettier-plugin-solidity": "^1.0.0-beta.19",
     "tailwindcss": "^3.0.24"
   },
   "prettier": {
     "singleQuote": true,
     "trailingComma": "none",
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "overrides": [
+    {
+      "files": "*.sol",
+      "options": {
+        "printWidth": 80,
+        "tabWidth": 4,
+        "useTabs": false,
+        "singleQuote": false,
+        "bracketSpacing": false,
+        "explicitTypes": "always"
+      }
+    }
+  ]
   }
 }
