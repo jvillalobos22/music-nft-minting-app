@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:watch": "nodemon --ext js,sol -x 'hardhat test --show-stack-traces'"
   },
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
@@ -37,6 +38,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "ethereum-waffle": "^4.0.0",
+    "nodemon": "^2.0.15",
     "postcss": "^8.4.12",
     "prettier": "^2.6.2",
     "prettier-plugin-solidity": "^1.0.0-beta.19",
@@ -47,17 +49,21 @@
     "trailingComma": "none",
     "arrowParens": "avoid",
     "overrides": [
-    {
-      "files": "*.sol",
-      "options": {
-        "printWidth": 80,
-        "tabWidth": 4,
-        "useTabs": false,
-        "singleQuote": false,
-        "bracketSpacing": false,
-        "explicitTypes": "always"
+      {
+        "files": "*.sol",
+        "options": {
+          "printWidth": 80,
+          "tabWidth": 4,
+          "useTabs": false,
+          "singleQuote": false,
+          "bracketSpacing": false,
+          "explicitTypes": "always"
+        }
       }
-    }
-  ]
+    ]
+  },
+  "nodemonConfig": {
+    "ignore": ["styles/*"],
+    "delay": 2500
   }
 }
