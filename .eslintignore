@@ -2,3 +2,5 @@ node_modules
 artifacts
 cache
 coverage
+contracts/ERC721A.sol
+hardhat.config.js

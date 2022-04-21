@@ -1,15 +1,13 @@
 {
   "extends": ["next/core-web-vitals", "eslint:recommended", "airbnb"],
   "rules": {
-    "jsx-quotes": [
-      "error",
-      "prefer-double",
-      "standard",
-      "plugin:node/recommended"
-    ],
+    "jsx-quotes": 1,
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "comma-dangle": "off",
+    "arrow-parens": "off",
+    "no-console": "off"
   },
   "env": {
     "browser": false,

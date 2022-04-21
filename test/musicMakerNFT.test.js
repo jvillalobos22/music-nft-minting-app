@@ -1,8 +1,8 @@
 const { expect } = require('chai');
 const { ethers } = require('hardhat');
 
-describe('MusicMakerNFT', function () {
-  it('Should set the platformContractAddress', async function () {
+describe('MusicMakerNFT', () => {
+  it('Should set the platformContractAddress', async () => {
     const fakePlatformAddress = '0x400830aC1BC7956ae4b81C2658d9CC08824FEaEB';
 
     const MusicMakerNFT = await ethers.getContractFactory('MusicMakerNFT');
@@ -16,7 +16,7 @@ describe('MusicMakerNFT', function () {
     expect(await musicMakerNft.MAX_SINGLE_MINT()).to.equal('10');
   });
 
-  it('Should mint a single nft, pay the fees and store the provided URI', async function () {
+  it('Should mint a single nft, pay the fees and store the provided URI', async () => {
     const fakePlatformAddress = '0x400830aC1BC7956ae4b81C2658d9CC08824FEaEB';
     const fakeLocationOne = 'https://www.mytokenlocation.com';
     const fakeLocationTwo = 'https://www.mytokenlocation2.com';
@@ -46,7 +46,7 @@ describe('MusicMakerNFT', function () {
     expect(secondTokenURI).to.equal(fakeLocationTwo);
   });
 
-  it('Should mint 10 nfts to the same URI', async function () {
+  it('Should mint 10 nfts to the same URI', async () => {
     const fakePlatformAddress = '0x400830aC1BC7956ae4b81C2658d9CC08824FEaEB';
     const fakeLocationOne = 'https://www.mytokenlocation.com';
 
@@ -70,10 +70,11 @@ describe('MusicMakerNFT', function () {
     const lastTokenURI = await musicMakerNft.tokenURI(9);
 
     expect(firstTokenURI).to.equal(fakeLocationOne);
+    expect(secondTokenURI).to.equal(fakeLocationOne);
     expect(lastTokenURI).to.equal(fakeLocationOne);
   });
 
-  it('Should revert if trying to mint > MAX_PUBLIC_MINT', async function () {
+  it('Should revert if trying to mint > MAX_PUBLIC_MINT', async () => {
     const fakePlatformAddress = '0x400830aC1BC7956ae4b81C2658d9CC08824FEaEB';
     const fakeLocationOne = 'https://www.mytokenlocation.com';
 
