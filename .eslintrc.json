@@ -7,7 +7,11 @@
     "react/react-in-jsx-scope": "off",
     "comma-dangle": "off",
     "arrow-parens": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "react/function-component-definition": [
+      1,
+      { "namedComponents": "arrow-function" }
+    ]
   },
   "env": {
     "browser": false,
