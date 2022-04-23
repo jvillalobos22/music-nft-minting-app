@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
@@ -6,12 +5,14 @@ import axios from 'axios';
 import Web3Modal from 'web3modal';
 import Head from 'next/head';
 
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Layout.module.css';
 
 import { nftAddress, mintedMusicAddress } from '../config';
 
 import NFT from '../artifacts/contracts/MusicMakerNFT.sol/MusicMakerNFT.json';
 import MintedMusic from '../artifacts/contracts/MintedMusic.sol/MintedMusic.json';
+import Footer from '../components/Footer/Footer';
+import TrackListing from '../components/TrackListing/TrackListing';
 
 const MyTracks = () => {
   const [nftTracks, setNfts] = useState([]);
@@ -82,46 +83,17 @@ const MyTracks = () => {
       </Head>
       <main className={styles.main}>
         <div className="flex justify-center">
-          <div className="p-4">
+          <div className="pt-4">
             <h2 className="text-2xl py-2">NFT Tracks You Created: </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
               {nftTracks.map(trackNFT => (
-                <div
-                  key={trackNFT.tokenId}
-                  className="border shadow rounded-xl overflow-hidden"
-                >
-                  {trackNFT.track && (
-                    <audio controls>
-                      <source src={trackNFT.track} type="audio/wav" />
-                      Your browser does not support the audio element.
-                    </audio>
-                  )}
-                  <img
-                    src={trackNFT.image}
-                    className="rounded"
-                    alt={trackNFT.description}
-                  />
-                  <div className="p-4 bg-black">
-                    <p className="text-2xl font-bold text-white">
-                      {trackNFT.name}
-                    </p>
-                  </div>
-                </div>
+                <TrackListing trackNFT={trackNFT} />
               ))}
             </div>
           </div>
         </div>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://juantonmusic.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Built by&nbsp;
-          <span>Juanton</span>
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 };

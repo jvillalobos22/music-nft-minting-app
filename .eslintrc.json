@@ -14,7 +14,8 @@
     ],
     "implicit-arrow-linebreak": "off",
     "react/jsx-curly-newline": "off",
-    "operator-linebreak": ["error", "after"]
+    "operator-linebreak": ["error", "after"],
+    "jsx-a11y/media-has-caption": "off"
   },
   "env": {
     "browser": false,
