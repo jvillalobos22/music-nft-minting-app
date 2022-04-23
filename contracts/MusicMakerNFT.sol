@@ -32,6 +32,10 @@ contract MusicMakerNFT is ERC721A, Ownable {
         _;
     }
 
+    function getMintingPrice() public pure returns (uint256) {
+        return PUBLIC_MINTING_PRICE;
+    }
+
     function mint(string memory thisTokenURI, uint256 _quantity) public payable callerIsUser {
         require(
             (totalPublicMint[msg.sender] + _quantity) <= MAX_PUBLIC_MINT,

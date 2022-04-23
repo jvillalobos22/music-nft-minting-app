@@ -11,7 +11,10 @@
     "react/function-component-definition": [
       1,
       { "namedComponents": "arrow-function" }
-    ]
+    ],
+    "implicit-arrow-linebreak": "off",
+    "react/jsx-curly-newline": "off",
+    "operator-linebreak": ["error", "after"]
   },
   "env": {
     "browser": false,

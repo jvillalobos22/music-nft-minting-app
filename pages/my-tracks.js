@@ -1,18 +1,19 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable @next/next/no-img-element */
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import axios from 'axios';
 import Web3Modal from 'web3modal';
 import Head from 'next/head';
 
+import styles from '../styles/Home.module.css';
+
 import { nftAddress, mintedMusicAddress } from '../config';
 
 import NFT from '../artifacts/contracts/MusicMakerNFT.sol/MusicMakerNFT.json';
 import MintedMusic from '../artifacts/contracts/MintedMusic.sol/MintedMusic.json';
-import styles from '../styles/Home.module.css';
 
-const Home = () => {
+const MyTracks = () => {
   const [nftTracks, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState('not-loaded');
 
@@ -60,57 +61,57 @@ const Home = () => {
   useEffect(() => {
     loadNFTs();
   }, []);
+
+  if (loadingState === 'loaded' && !nftTracks.length) {
+    return (
+      <h1 className="px-20 py-10 text-3xl">
+        There are no assets in this wallet.
+      </h1>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Minted Music</title>
+        <title>TRAX - My Tracks</title>
         <meta
           name="description"
           content="a web3 app to mint and listen to music NFTs"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main className={styles.main}>
-        {loadingState === 'loaded' && !nftTracks.length ? (
-          <div className="flex justify-center">
-            <h1 className={styles.title}>
-              There are currently no track NFTs listed. Try adding one!
-            </h1>
-          </div>
-        ) : (
-          <div className="flex justify-center">
-            <div className="p-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                {nftTracks.map(trackNFT => (
-                  <div
-                    key={trackNFT.tokenId}
-                    className="border shadow rounded-xl overflow-hidden"
-                  >
-                    {trackNFT.track && (
-                      <audio controls>
-                        <source src={trackNFT.track} type="audio/wav" />
-                        Your browser does not support the audio element.
-                      </audio>
-                    )}
-                    <img
-                      src={trackNFT.image}
-                      className="rounded"
-                      alt={trackNFT.description}
-                    />
-                    <div className="p-4 bg-black">
-                      <p className="text-2xl font-bold text-white">
-                        {trackNFT.name}
-                      </p>
-                    </div>
+        <div className="flex justify-center">
+          <div className="p-4">
+            <h2 className="text-2xl py-2">NFT Tracks You Created: </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+              {nftTracks.map(trackNFT => (
+                <div
+                  key={trackNFT.tokenId}
+                  className="border shadow rounded-xl overflow-hidden"
+                >
+                  {trackNFT.track && (
+                    <audio controls>
+                      <source src={trackNFT.track} type="audio/wav" />
+                      Your browser does not support the audio element.
+                    </audio>
+                  )}
+                  <img
+                    src={trackNFT.image}
+                    className="rounded"
+                    alt={trackNFT.description}
+                  />
+                  <div className="p-4 bg-black">
+                    <p className="text-2xl font-bold text-white">
+                      {trackNFT.name}
+                    </p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
-        )}
+        </div>
       </main>
-
       <footer className={styles.footer}>
         <a
           href="https://juantonmusic.com"
@@ -125,4 +126,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MyTracks;
