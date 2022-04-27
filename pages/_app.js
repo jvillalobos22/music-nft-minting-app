@@ -1,34 +1,40 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/prop-types */
-import '../styles/globals.css';
-import Link from 'next/link';
 
-const MyApp = ({ Component, pageProps }) => {
-  return (
-    <div>
-      <nav className="border-b p-6">
-        <p className="text-4xl font-bold">Minted Music</p>
-        <div className="flex mt-4">
-          <div className="mr-6 text-cyan-500">
-            <Link href="/" passHref>
-              Listen
-            </Link>
-          </div>
-          <div className="mr-6 text-cyan-500">
-            <Link href="/create-track">Create Track NFT</Link>
-          </div>
-          <div className="mr-6 text-cyan-500">
-            <Link href="/my-tracks">My Tracks</Link>
-          </div>
-          <div className="mr-6 text-cyan-500">
-            <Link href="/creator-dashboard">Creator Dashboard</Link>
-          </div>
-        </div>
-      </nav>
+import { Web3ReactProvider } from '@web3-react/core';
+import { PropTypes } from 'prop-types';
+import { Web3Provider } from '@ethersproject/providers';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+import '../styles/globals.css';
+
+function getLibrary(provider) {
+  const library = new Web3Provider(provider);
+  library.pollingInterval = 8000;
+  return library;
+}
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#01ff95'
+    }
+  }
+});
+
+const MyApp = ({ Component, pageProps }) => (
+  <ThemeProvider theme={darkTheme}>
+    <Web3ReactProvider getLibrary={getLibrary}>
       <Component {...pageProps} />
-    </div>
-  );
+    </Web3ReactProvider>
+  </ThemeProvider>
+);
+
+MyApp.propTypes = {
+  Component: PropTypes.object.isRequired,
+  pageProps: PropTypes.object.isRequired
 };
+MyApp.defaultProps = {};
 
 export default MyApp;

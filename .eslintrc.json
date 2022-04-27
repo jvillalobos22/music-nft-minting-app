@@ -8,17 +8,18 @@
     "comma-dangle": "off",
     "arrow-parens": "off",
     "no-console": "off",
+    "object-curly-newline": "off",
+    "operator-linebreak": "off",
     "react/function-component-definition": [
       1,
       { "namedComponents": "arrow-function" }
     ],
     "implicit-arrow-linebreak": "off",
     "react/jsx-curly-newline": "off",
-    "operator-linebreak": ["error", "after"],
     "jsx-a11y/media-has-caption": "off"
   },
   "env": {
-    "browser": false,
+    "browser": true,
     "es2021": true,
     "mocha": true,
     "node": true
