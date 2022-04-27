@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
@@ -137,8 +138,6 @@ const AccountMenu = ({
         color="inherit"
         className={className}
       >
-        {/* <Wallet /> */}
-
         <img fill="red" stroke="red" src={WalletIcon.src} alt="wallet icon" />
         <span>{addressDisplay}</span>
         <BigStatusIndicator className="ml-2">

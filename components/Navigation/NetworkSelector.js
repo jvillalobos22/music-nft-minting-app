@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import { PropTypes } from 'prop-types';
@@ -5,10 +6,25 @@ import { PropTypes } from 'prop-types';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useWeb3React } from '@web3-react/core';
+import styled from '@emotion/styled';
 import {
+  SupportedChainId,
   CHAIN_IDS_TO_DISPLAY_NAMES,
   SUPPORTED_NETWORK_OBJECTS
 } from '../../constants/chains';
+import PolygonMaticLogo from '../../assets/svg/polygon-matic-logo.svg';
+import EthereumIcon from '../../assets/images/ethereum-logo.png';
+
+const IconWrapper = styled.div`
+  margin-right: 8px;
+  img {
+    max-width: 24px;
+  }
+`;
+
+const PolygonIcon = styled.img`
+  margin-right: 8px;
+`;
 
 const changeNetwork = async ({ networkName, setNetworkError }) => {
   try {
@@ -25,6 +41,27 @@ const changeNetwork = async ({ networkName, setNetworkError }) => {
   } catch (err) {
     setNetworkError(err.message);
   }
+};
+
+const getNetworkIcon = chainId => {
+  if (
+    chainId === SupportedChainId.POLYGON ||
+    chainId === SupportedChainId.POLYGON_MUMBAI
+  ) {
+    return (
+      <PolygonIcon
+        width="24px"
+        src={PolygonMaticLogo.src}
+        alt="polygon matic icon"
+      />
+    );
+  }
+
+  return (
+    <IconWrapper>
+      <img src={EthereumIcon.src} alt="eth network icon" />
+    </IconWrapper>
+  );
 };
 
 const NetworkSelector = ({ className }) => {
@@ -70,6 +107,7 @@ const NetworkSelector = ({ className }) => {
     ? CHAIN_IDS_TO_DISPLAY_NAMES[chainId]
     : 'Select Network';
 
+  const currentNetworkIcon = getNetworkIcon(chainId);
   return (
     <>
       <Button
@@ -81,7 +119,7 @@ const NetworkSelector = ({ className }) => {
         color="inherit"
         className={className}
       >
-        {currentNetwork}
+        {currentNetworkIcon} {currentNetwork}
       </Button>
 
       <Menu
@@ -92,18 +130,31 @@ const NetworkSelector = ({ className }) => {
         onClose={handleClose}
       >
         <MenuItem onClick={() => handleSelectChange('polygon')}>
+          <PolygonIcon
+            width="24px"
+            src={PolygonMaticLogo.src}
+            alt="polygon matic icon"
+          />
           Polygon Mainnet
         </MenuItem>
         <MenuItem
           value="polygonMumbai"
           onClick={() => handleSelectChange('polygon_mumbai')}
         >
+          <PolygonIcon
+            width="24px"
+            src={PolygonMaticLogo.src}
+            alt="polygon matic icon"
+          />
           Polygon Mumbai
         </MenuItem>
         <MenuItem
           value="localhost"
           onClick={() => handleSelectChange('localhost')}
         >
+          <IconWrapper>
+            <img src={EthereumIcon.src} alt="polygon matic icon" />{' '}
+          </IconWrapper>
           Localhost
         </MenuItem>
       </Menu>
