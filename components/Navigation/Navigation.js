@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
-// import Link from 'next/link';
+import Link from 'next/link';
 import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core';
 
 import {
@@ -116,9 +116,33 @@ const Navigation = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
             Minted Music
           </Typography>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'flex' },
+              justifyContent: 'flex-start'
+            }}
+          >
+            <div className="flex ml-8">
+              <Typography variant="body2" color="primary" className="mr-6">
+                <Link href="/" passHref>
+                  Listen
+                </Link>
+              </Typography>
+              <Typography variant="body2" color="primary" className="mr-6">
+                <Link href="/create-track">Create Track NFT</Link>
+              </Typography>
+              <Typography variant="body2" color="primary" className="mr-6">
+                <Link href="/my-tracks">My Tracks</Link>
+              </Typography>
+              <Typography variant="body2" color="primary" className="">
+                <Link href="/creator-dashboard">Creator Dashboard</Link>
+              </Typography>
+            </div>
+          </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box
             sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}

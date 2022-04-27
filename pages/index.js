@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import axios from 'axios';
 import Head from 'next/head';
-import { useWeb3React } from '@web3-react/core';
 
 import { nftAddress, mintedMusicAddress } from '../config';
 
@@ -17,18 +16,9 @@ import Navigation from '../components/Navigation/Navigation';
 const Home = () => {
   const [nftTracks, setNfts] = useState([]);
   const [loadingState, setLoadingState] = useState('not-loaded');
-  const context = useWeb3React();
 
   async function loadNFTs() {
-    const { connector } = context;
-    console.log('connector', connector);
-    // const provider = new ethers.providers.Web3Provider(connector);
     const provider = new ethers.providers.JsonRpcProvider();
-    console.log('provider', provider);
-
-    // const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-    // Prompt user for account connections
-    // await provider.send('eth_requestAccounts', []);
 
     // we need the signer here to know who is msg.sender
     const signer = provider.getSigner();
