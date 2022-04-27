@@ -18,7 +18,7 @@ import EthereumIcon from '../../assets/images/ethereum-logo.png';
 const IconWrapper = styled.div`
   margin-right: 8px;
   img {
-    max-width: 24px;
+    max-width: 20px;
   }
 `;
 
@@ -50,7 +50,7 @@ const getNetworkIcon = chainId => {
   ) {
     return (
       <PolygonIcon
-        width="24px"
+        width="18px"
         src={PolygonMaticLogo.src}
         alt="polygon matic icon"
       />
@@ -131,7 +131,7 @@ const NetworkSelector = ({ className }) => {
       >
         <MenuItem onClick={() => handleSelectChange('polygon')}>
           <PolygonIcon
-            width="24px"
+            width="20px"
             src={PolygonMaticLogo.src}
             alt="polygon matic icon"
           />
@@ -142,7 +142,7 @@ const NetworkSelector = ({ className }) => {
           onClick={() => handleSelectChange('polygon_mumbai')}
         >
           <PolygonIcon
-            width="24px"
+            width="20px"
             src={PolygonMaticLogo.src}
             alt="polygon matic icon"
           />
