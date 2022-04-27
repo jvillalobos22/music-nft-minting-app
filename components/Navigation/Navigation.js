@@ -20,23 +20,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useEagerConnect, useInactiveListener } from '../../hooks/connector';
 
-import {
-  injected,
-  network,
-  walletconnect,
-  walletlink,
-  ledger
-} from '../../connectors/connectors';
+import { walletconnect, connectorsByName } from '../../connectors/connectors';
 import NetworkSelector from './NetworkSelector';
 import AccountMenu from './AccountMenu';
-
-const connectorsByName = {
-  Injected: injected,
-  Network: network,
-  WalletConnect: walletconnect,
-  WalletLink: walletlink,
-  Ledger: ledger
-};
 
 function getErrorMessage(error) {
   if (error instanceof NoEthereumProviderError) {
@@ -101,8 +87,6 @@ const Navigation = () => {
     });
   }, [connector]);
 
-  console.log('currentConnectorName', currentConnectorName);
-
   return (
     <div>
       <AppBar position="static">
@@ -150,6 +134,9 @@ const Navigation = () => {
             <AccountMenu
               className="mr-4"
               currentConnectorName={currentConnectorName}
+              activatingConnector={activatingConnector}
+              setActivatingConnector={setActivatingConnector}
+              triedEager={triedEager}
             />
             <NetworkSelector />
           </Box>

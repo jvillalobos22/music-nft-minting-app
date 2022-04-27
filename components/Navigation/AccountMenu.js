@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
@@ -9,6 +10,7 @@ import styled from 'styled-components';
 import { CHAIN_IDS_TO_DISPLAY_NAMES } from '../../constants/chains';
 import NetworkBalanceIndicator from './NetworkBalanceIndicator';
 import { network, walletconnect } from '../../connectors/connectors';
+import WalletModal from './WalletModal';
 
 const StyledMenu = styled(Menu)`
   width: 100%;
@@ -77,7 +79,13 @@ const getAddressDisplay = account => {
   return display;
 };
 
-const AccountMenu = ({ className, currentConnectorName }) => {
+const AccountMenu = ({
+  className,
+  currentConnectorName,
+  activatingConnector,
+  setActivatingConnector,
+  triedEager
+}) => {
   const context = useWeb3React();
   const { active, chainId, connector, account, deactivate, error } = context;
 
@@ -102,7 +110,7 @@ const AccountMenu = ({ className, currentConnectorName }) => {
     ? CHAIN_IDS_TO_DISPLAY_NAMES[chainId]
     : 'Not Connected';
 
-  return (
+  return active || error ? (
     <>
       <Button
         size="small"
@@ -133,8 +141,8 @@ const AccountMenu = ({ className, currentConnectorName }) => {
               label="Disconnect"
               variant="outlined"
               onClick={() => {
-                handleClose();
                 deactivate();
+                handleClose();
               }}
             />
           )}
@@ -193,12 +201,21 @@ const AccountMenu = ({ className, currentConnectorName }) => {
         </MenuBottom>
       </StyledMenu>
     </>
+  ) : (
+    <WalletModal
+      activatingConnector={activatingConnector}
+      setActivatingConnector={setActivatingConnector}
+      triedEager={triedEager}
+    />
   );
 };
 
 AccountMenu.propTypes = {
   className: PropTypes.string,
-  currentConnectorName: PropTypes.string
+  currentConnectorName: PropTypes.string,
+  triedEager: PropTypes.bool.isRequired,
+  activatingConnector: PropTypes.object.isRequired,
+  setActivatingConnector: PropTypes.func.isRequired
 };
 
 AccountMenu.defaultProps = { className: '', currentConnectorName: '' };

@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import styles from '../styles/Layout.module.css';
 import Footer from '../components/Footer/Footer';
-import MyComponent from '../components/sample';
+import MyComponent from '../components/sample-connection-page';
 import Navigation from '../components/Navigation/Navigation';
 
 const MyTracks = () => (

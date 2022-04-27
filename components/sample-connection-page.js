@@ -16,21 +16,11 @@ import { formatEther } from '@ethersproject/units';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import {
-  injected,
   network,
   walletconnect,
-  walletlink,
-  ledger
+  connectorsByName
 } from '../connectors/connectors';
 import { useEagerConnect, useInactiveListener } from '../hooks/connector';
-
-const connectorsByName = {
-  Injected: injected,
-  Network: network,
-  WalletConnect: walletconnect,
-  WalletLink: walletlink,
-  Ledger: ledger
-};
 
 function getErrorMessage(error) {
   if (error instanceof NoEthereumProviderError) {

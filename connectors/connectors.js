@@ -40,6 +40,14 @@ export const ledger = new LedgerConnector({
   pollingInterval: POLLING_INTERVAL
 });
 
+export const connectorsByName = {
+  Injected: injected,
+  Network: network,
+  WalletConnect: walletconnect,
+  WalletLink: walletlink,
+  Ledger: ledger
+};
+
 // export const trezor = new TrezorConnector({
 //   chainId: 1,
 //   url: RPC_URLS[1],
