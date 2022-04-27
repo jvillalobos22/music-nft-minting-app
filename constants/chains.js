@@ -1,3 +1,8 @@
+import ethereumLogoUrl from '../assets/images/ethereum-logo.png';
+// import arbitrumLogoUrl from '../assets/svg/arbitrum_logo.svg';
+// import optimismLogoUrl from '../assets/svg/optimistic_ethereum.svg';
+import polygonMaticLogo from '../assets/svg/polygon-matic-logo.svg';
+
 /**
  * List of all the networks supported by the Uniswap Interface
  */
@@ -122,5 +127,56 @@ export const SUPPORTED_NETWORK_OBJECTS = {
       decimals: 18
     },
     rpcUrls: ['https://localhost:8545']
+  }
+};
+
+export const CHAIN_INFO = {
+  [SupportedChainId.MAINNET]: {
+    docs: 'https://docs.uniswap.org/',
+    explorer: 'https://etherscan.io/',
+    infoLink: 'https://info.uniswap.org/#/',
+    label: 'Ethereum',
+    logoUrl: ethereumLogoUrl,
+    nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 }
+  },
+  [SupportedChainId.RINKEBY]: {
+    docs: 'https://docs.uniswap.org/',
+    explorer: 'https://rinkeby.etherscan.io/',
+    infoLink: 'https://info.uniswap.org/#/',
+    label: 'Rinkeby',
+    logoUrl: ethereumLogoUrl,
+    nativeCurrency: { name: 'Rinkeby Ether', symbol: 'rETH', decimals: 18 }
+  },
+  [SupportedChainId.ROPSTEN]: {
+    docs: 'https://docs.uniswap.org/',
+    explorer: 'https://ropsten.etherscan.io/',
+    infoLink: 'https://info.uniswap.org/#/',
+    label: 'Ropsten',
+    logoUrl: ethereumLogoUrl,
+    nativeCurrency: { name: 'Ropsten Ether', symbol: 'ropETH', decimals: 18 }
+  },
+  [SupportedChainId.POLYGON]: {
+    // blockWaitMsBeforeWarning: ms`10m`,
+    bridge: 'https://wallet.polygon.technology/bridge',
+    docs: 'https://polygon.io/',
+    explorer: 'https://polygonscan.com/',
+    infoLink: 'https://info.uniswap.org/#/polygon/',
+    label: 'Polygon',
+    logoUrl: polygonMaticLogo,
+    nativeCurrency: { name: 'Polygon Matic', symbol: 'MATIC', decimals: 18 }
+  },
+  [SupportedChainId.POLYGON_MUMBAI]: {
+    // blockWaitMsBeforeWarning: ms`10m`,
+    bridge: 'https://wallet.polygon.technology/bridge',
+    docs: 'https://polygon.io/',
+    explorer: 'https://mumbai.polygonscan.com/',
+    infoLink: 'https://info.uniswap.org/#/polygon/',
+    label: 'Polygon Mumbai',
+    logoUrl: polygonMaticLogo,
+    nativeCurrency: {
+      name: 'Polygon Mumbai Matic',
+      symbol: 'mMATIC',
+      decimals: 18
+    }
   }
 };

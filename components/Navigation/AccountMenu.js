@@ -11,6 +11,22 @@ import { CHAIN_IDS_TO_DISPLAY_NAMES } from '../../constants/chains';
 import NetworkBalanceIndicator from './NetworkBalanceIndicator';
 import { network, walletconnect } from '../../connectors/connectors';
 import WalletModal from './WalletModal';
+// import { ReactComponent as WalletIcon } from '../../assets/svg/wallet.svg';
+import WalletIcon from '../../assets/svg/wallet_white.svg';
+
+// export const Wallet = styled(WalletIcon)`
+//   clip-path: stroke-box;
+//   height: 1em;
+//   ${'' /* stroke: ${({ color = 'currentColor', theme }) => theme[color]}; */}
+//   stroke: #fff;
+//   width: 1em;
+// `;
+
+const WalletButton = styled(Button)`
+  img {
+    margin-right: 8px;
+  }
+`;
 
 const StyledMenu = styled(Menu)`
   width: 100%;
@@ -112,7 +128,7 @@ const AccountMenu = ({
 
   return active || error ? (
     <>
-      <Button
+      <WalletButton
         size="small"
         aria-label="account of current user"
         aria-controls="menu-appbar"
@@ -121,11 +137,14 @@ const AccountMenu = ({
         color="inherit"
         className={className}
       >
-        <BigStatusIndicator className="mr-2">
+        {/* <Wallet /> */}
+
+        <img fill="red" stroke="red" src={WalletIcon.src} alt="wallet icon" />
+        <span>{addressDisplay}</span>
+        <BigStatusIndicator className="ml-2">
           {active ? '🟢' : error ? '🔴' : '🟠'}
         </BigStatusIndicator>
-        <span>{addressDisplay}</span>
-      </Button>
+      </WalletButton>
       <StyledMenu
         id="menu-appbar"
         anchorEl={anchorEl}

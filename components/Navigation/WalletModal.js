@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable no-else-return */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable indent */
 /* eslint-disable no-nested-ternary */
@@ -7,11 +9,26 @@ import PropTypes from 'prop-types';
 import { Box, Button, Modal } from '@mui/material';
 import { useWeb3React } from '@web3-react/core';
 import CircularProgress from '@mui/material/CircularProgress';
+import MetamaskIcon from '../../assets/images/metamask.png';
+import CoinbaseIcon from '../../assets/images/coinbaseWalletIcon.svg';
+import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg';
+import EthereumIcon from '../../assets/images/ethereum-logo.png';
 
 import { connectorsByName } from '../../connectors/connectors';
 
 const ProviderButton = styled(Button)`
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const IconWrapper = styled.div`
+  margin-right: 8px;
+  img {
+    font-size: 24px;
+    max-width: 24px;
+  }
 `;
 
 const style = {
@@ -26,6 +43,28 @@ const style = {
   p: 4
 };
 
+const getConnectorName = name => {
+  if (name === 'Injected') {
+    return 'Metamask';
+  } else if (name === 'WalletLink') {
+    return 'Coinbase';
+  }
+
+  return name;
+};
+
+const getConnectorIcon = name => {
+  if (name === 'Injected') {
+    return <img src={MetamaskIcon.src} alt="metamask wallet icon" />;
+  } else if (name === 'WalletLink') {
+    return <img src={CoinbaseIcon.src} alt="coinbase wallet icon" />;
+  } else if (name === 'WalletConnect') {
+    return <img src={WalletConnectIcon.src} alt="wallet connect icon" />;
+  }
+
+  return <img src={EthereumIcon.src} alt="eth network icon" />;
+};
+
 const WalletModal = ({
   className,
   activatingConnector,
@@ -38,6 +77,8 @@ const WalletModal = ({
 
   const context = useWeb3React();
   const { connector, activate, error } = context;
+
+  console.log('MetamaskIcon', MetamaskIcon);
 
   return (
     <>
@@ -66,7 +107,8 @@ const WalletModal = ({
             const connected = currentConnector === connector;
             const disabled =
               !triedEager || !!activatingConnector || connected || !!error;
-
+            const connectorName = getConnectorName(name);
+            const connectorIcon = getConnectorIcon(name);
             return (
               <ProviderButton
                 key={name}
@@ -85,8 +127,9 @@ const WalletModal = ({
                       ✅
                     </span>
                   )}
+                  {connectorIcon && <IconWrapper>{connectorIcon}</IconWrapper>}
                 </div>
-                {name}
+                {connectorName}
               </ProviderButton>
             );
           })}
