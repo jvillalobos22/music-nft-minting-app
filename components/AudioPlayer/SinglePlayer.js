@@ -1,23 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Amplitude from 'amplitudejs';
 
 import styled from 'styled-components';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
+import { PauseIconSC, PlayArrowIconSC } from './AudioSC';
+
+import { useAudioPlayer } from '../../hooks/audio-player-context';
 
 const Layout = styled.div``;
-
-const PauseIconSC = styled(PauseIcon)`
-  color: #01ff95;
-  font-size: 48px;
-`;
-
-const PlayArrowIconSC = styled(PlayArrowIcon)`
-  color: #01ff95;
-  font-size: 48px;
-`;
 
 const MetaContainer = styled.div`
   span[data-amplitude-song-info='name'] {
@@ -36,8 +27,8 @@ const MetaContainer = styled.div`
 
 const SinglePlayer = ({ trackNFT }) => {
   const ref = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
+  const { audioPlayerState, audioPlayerDispatch } = useAudioPlayer();
+  const { isPlaying } = audioPlayerState;
   console.log(trackNFT);
 
   const { description } = trackNFT;
@@ -65,7 +56,11 @@ const SinglePlayer = ({ trackNFT }) => {
 
   const onClick = () => {
     const isTrackPlaying = ref.current?.classList.contains('amplitude-playing');
-    setIsPlaying(isTrackPlaying);
+
+    audioPlayerDispatch({
+      type: 'setIsPlaying',
+      payload: { isPlaying: isTrackPlaying }
+    });
   };
 
   return (

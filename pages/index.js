@@ -4,15 +4,20 @@ import { ethers } from 'ethers';
 import axios from 'axios';
 import Head from 'next/head';
 import { v4 as uuidv4 } from 'uuid';
+import dynamic from 'next/dynamic';
 
 import { nftAddress, mintedMusicAddress } from '../config';
 
 import NFT from '../artifacts/contracts/MusicMakerNFT.sol/MusicMakerNFT.json';
 import MintedMusic from '../artifacts/contracts/MintedMusic.sol/MintedMusic.json';
 import styles from '../styles/Layout.module.css';
-import Footer from '../components/Footer/Footer';
+// import Footer from '../components/Footer/Footer';
 import TrackListing from '../components/TrackListing/TrackListing';
 import Navigation from '../components/Navigation/Navigation';
+
+const FooterWithNoSSR = dynamic(() => import('../components/Footer/Footer'), {
+  ssr: false
+});
 
 const Home = () => {
   const [nftTracks, setNfts] = useState([]);
@@ -87,7 +92,7 @@ const Home = () => {
               <div className="flex justify-start pt-8">
                 <h1 className={styles.title}>New NFTs</h1>
               </div>
-              <div className="flex justify-center pt-8">
+              <div className="flex justify-center pt-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {nftTracks.map(trackNFT => {
                     const someKey = uuidv4();
@@ -100,7 +105,7 @@ const Home = () => {
         </div>
       </main>
 
-      <Footer />
+      <FooterWithNoSSR />
     </>
   );
 };

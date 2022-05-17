@@ -7,6 +7,7 @@ import { Web3Provider } from '@ethersproject/providers';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import '../styles/globals.css';
+import { AudioPlayerProvider } from '../hooks/audio-player-context';
 
 function getLibrary(provider) {
   const library = new Web3Provider(provider);
@@ -29,7 +30,9 @@ const darkTheme = createTheme({
 const MyApp = ({ Component, pageProps }) => (
   <ThemeProvider theme={darkTheme}>
     <Web3ReactProvider getLibrary={getLibrary}>
-      <Component {...pageProps} />
+      <AudioPlayerProvider>
+        <Component {...pageProps} />
+      </AudioPlayerProvider>
     </Web3ReactProvider>
   </ThemeProvider>
 );

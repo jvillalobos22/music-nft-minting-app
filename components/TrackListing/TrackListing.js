@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
 
-// import SinglePlayer from '../AudioPlayer/SinglePlayer';
-
 const SinglePlayerWithNoSSR = dynamic(
   () => import('../AudioPlayer/SinglePlayer'),
   { ssr: false }
