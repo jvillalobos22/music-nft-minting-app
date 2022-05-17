@@ -36,4 +36,7 @@ yarn-error.log*
 # vercel
 .vercel
 
+# seed assets
+/seed-assets
+
 config.js
