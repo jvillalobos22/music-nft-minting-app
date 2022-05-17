@@ -1,3 +1,217 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400&display=swap'); */
+
+body, p, div, a, li, h1, h2, h3, h4, h5, h6, span, strong, button {
+    font-family: 'Anonymous Pro', sans-serif, monospace;
+    color: #fff;
+}
+
+body {
+    background-color: rgb(80, 80, 80);
+    color: #fff;
+    height: 100vh;
+}
+
+div#next {
+    height: 100vh;
+}
+
+/*****************************************************************************/
+/* audio player prototype styles */
+/*
+  1. Base
+*/
+/*
+  2. Components
+*/
+div.control-container {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+div.control-container div.amplitude-play-pause {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+div.time-container {
+    opacity: 0.5;
+    font-weight: 600;
+    font-size: 12px;
+    color: #fff;
+    height: 15px;
+    position: relative;
+}
+
+div.time-container span.current-time {
+    position: absolute;
+    top: 4px;
+    left: 16px;
+}
+
+div.time-container span.duration {
+    position: absolute;
+    top: 4px;
+    right: 16px;
+}
+
+
+progress.amplitude-song-played-progress {
+    background-color: rgb(18, 18, 18);
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    display: block;
+    cursor: pointer;
+    border: none;
+}
+
+progress.amplitude-song-played-progress:not([value]) {
+    background-color: rgb(18, 18, 18);
+}
+
+progress[value]::-webkit-progress-bar {
+    background-color: rgb(18, 18, 18);
+}
+
+progress[value]::-moz-progress-bar {
+    background-color: #01ff95;
+}
+
+progress[value]::-webkit-progress-value {
+    background-color: #01ff95;
+}
+
+div.bottom-container {
+    background-color: rgb(18, 18, 18);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+div#single-song-player {
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    margin-top: 50px;
+    width: 100%;
+    max-width: 460px;
+    -webkit-font-smoothing: antialiased;
+}
+
+div#single-song-player img[data-amplitude-song-info="cover_art_url"] {
+    width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+/* RANGE STYLES */
+input[type=range].slider {
+    width: 100%;
+    margin: 0px 0;
+    background-color: transparent;
+    -webkit-appearance: none;
+}
+
+input[type=range].slider:focus {
+    outline: none;
+}
+
+input[type=range].slider::-webkit-slider-runnable-track {
+    background: rgb(18, 18, 18);
+    border: 0;
+    width: 100%;
+    height: 26px;
+    cursor: pointer;
+}
+
+input[type=range].slider::-webkit-slider-thumb {
+    margin-top: 0px;
+    width: 18px;
+    height: 26px;
+    background: #01ff95;
+    border: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+input[type=range].slider:focus::-webkit-slider-runnable-track {
+    background: rgb(18, 18, 18);
+}
+
+input[type=range].slider::-moz-range-track {
+    background: rgb(18, 18, 18);
+    border: 0;
+    width: 100%;
+    height: 26px;
+    cursor: pointer;
+}
+
+input[type=range].slider::-moz-range-thumb {
+    width: 18px;
+    height: 26px;
+    background: #01ff95;
+    border: 0;
+    cursor: pointer;
+}
+
+input[type=range].slider::-ms-track {
+    background: transparent;
+    border-color: transparent;
+    border-width: 0px 0;
+    color: transparent;
+    width: 100%;
+    height: 26px;
+    cursor: pointer;
+}
+
+input[type=range].slider::-ms-fill-lower {
+    background: #01ff95;
+    border: 0;
+}
+
+input[type=range].slider::-ms-fill-upper {
+    background: rgb(18, 18, 18);
+    border: 0;
+}
+
+input[type=range].slider::-ms-thumb {
+    width: 18px;
+    height: 26px;
+    background: #01ff95;
+    border: 0;
+    cursor: pointer;
+    margin-top: 0px;
+    /*Needed to keep the Edge thumb centred*/
+}
+
+input[type=range].slider:focus::-ms-fill-lower {
+    background: rgb(18, 18, 18);
+}
+
+input[type=range].slider:focus::-ms-fill-upper {
+    background: rgb(18, 18, 18);
+}
+
+/*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
+how to remove the virtical space around the range input in IE*/
+@supports (-ms-ime-align:auto) {
+
+    /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+    input[type=range].slider {
+        margin: 0;
+        /*Edge starts the margin from the thumb, not the track as other browsers do*/
+    }
+}
+
+/* END audio player prototype styles */
+/*****************************************************************************/
+
+

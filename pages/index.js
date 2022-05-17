@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import axios from 'axios';
 import Head from 'next/head';
+import { v4 as uuidv4 } from 'uuid';
 
 import { nftAddress, mintedMusicAddress } from '../config';
 
@@ -72,8 +73,9 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation />
-      <div className={styles.container}>
-        <main className={styles.main}>
+
+      <main className={styles.main}>
+        <div className={styles.container}>
           {loadingState === 'loaded' && !nftTracks.length ? (
             <div className="flex justify-center">
               <h1 className={styles.title}>
@@ -81,16 +83,23 @@ const Home = () => {
               </h1>
             </div>
           ) : (
-            <div className="flex justify-center pt-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {nftTracks.map(trackNFT => (
-                  <TrackListing trackNFT={trackNFT} />
-                ))}
+            <div>
+              <div className="flex justify-start pt-8">
+                <h1 className={styles.title}>New NFTs</h1>
+              </div>
+              <div className="flex justify-center pt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {nftTracks.map(trackNFT => {
+                    const someKey = uuidv4();
+                    return <TrackListing key={someKey} trackNFT={trackNFT} />;
+                  })}
+                </div>
               </div>
             </div>
           )}
-        </main>
-      </div>
+        </div>
+      </main>
+
       <Footer />
     </>
   );

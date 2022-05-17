@@ -232,10 +232,14 @@ AccountMenu.propTypes = {
   className: PropTypes.string,
   currentConnectorName: PropTypes.string,
   triedEager: PropTypes.bool.isRequired,
-  activatingConnector: PropTypes.object.isRequired,
+  activatingConnector: PropTypes.object,
   setActivatingConnector: PropTypes.func.isRequired
 };
 
-AccountMenu.defaultProps = { className: '', currentConnectorName: '' };
+AccountMenu.defaultProps = {
+  className: '',
+  currentConnectorName: '',
+  activatingConnector: undefined
+};
 
 export default AccountMenu;

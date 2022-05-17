@@ -13,6 +13,7 @@ import NFT from '../artifacts/contracts/MusicMakerNFT.sol/MusicMakerNFT.json';
 import MintedMusic from '../artifacts/contracts/MintedMusic.sol/MintedMusic.json';
 import Footer from '../components/Footer/Footer';
 import TrackListing from '../components/TrackListing/TrackListing';
+import Navigation from '../components/Navigation/Navigation';
 
 const MyTracks = () => {
   const [nftTracks, setNfts] = useState([]);
@@ -63,16 +64,8 @@ const MyTracks = () => {
     loadNFTs();
   }, []);
 
-  if (loadingState === 'loaded' && !nftTracks.length) {
-    return (
-      <h1 className="px-20 py-10 text-3xl">
-        There are no assets in this wallet.
-      </h1>
-    );
-  }
-
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>TRAX - My Tracks</title>
         <meta
@@ -81,20 +74,31 @@ const MyTracks = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navigation />
+
       <main className={styles.main}>
-        <div className="flex justify-center">
-          <div className="pt-4">
-            <h2 className="text-2xl py-2">NFT Tracks You Created: </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-              {nftTracks.map(trackNFT => (
-                <TrackListing trackNFT={trackNFT} />
-              ))}
-            </div>
+        <div className={styles.container}>
+          <div className="flex justify-center">
+            {loadingState === 'loaded' && !nftTracks.length ? (
+              <h1 className="px-20 py-10 text-3xl">
+                There are no assets in this wallet.
+              </h1>
+            ) : (
+              <div className="pt-4">
+                <h2 className="text-2xl py-2">NFT Tracks You Created: </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+                  {nftTracks.map(trackNFT => (
+                    <TrackListing trackNFT={trackNFT} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </main>
+
       <Footer />
-    </div>
+    </>
   );
 };
 

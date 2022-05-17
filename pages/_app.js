@@ -20,6 +20,9 @@ const darkTheme = createTheme({
     primary: {
       main: '#01ff95'
     }
+  },
+  typography: {
+    fontFamily: 'Anonymous Pro, Raleway, Arial, sans-serif, monospace'
   }
 });
 
@@ -32,7 +35,7 @@ const MyApp = ({ Component, pageProps }) => (
 );
 
 MyApp.propTypes = {
-  Component: PropTypes.object.isRequired,
+  Component: PropTypes.func.isRequired,
   pageProps: PropTypes.object.isRequired
 };
 MyApp.defaultProps = {};

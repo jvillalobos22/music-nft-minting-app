@@ -13,7 +13,6 @@ const MyTracks = () => (
         name="description"
         content="a web3 app to mint and listen to music NFTs"
       />
-      <link rel="icon" href="/favicon.ico" />
     </Head>
     <Navigation />
     <div className={styles.container}>

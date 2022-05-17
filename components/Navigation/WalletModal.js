@@ -141,13 +141,14 @@ const WalletModal = ({
 
 WalletModal.propTypes = {
   className: PropTypes.string,
-  activatingConnector: PropTypes.object.isRequired,
+  activatingConnector: PropTypes.object,
   triedEager: PropTypes.bool.isRequired,
   setActivatingConnector: PropTypes.func.isRequired
 };
 
 WalletModal.defaultProps = {
-  className: ''
+  className: '',
+  activatingConnector: undefined
 };
 
 export default WalletModal;
