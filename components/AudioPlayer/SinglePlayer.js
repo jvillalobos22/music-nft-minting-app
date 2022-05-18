@@ -1,7 +1,7 @@
+/* eslint-disable camelcase */
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import Amplitude from 'amplitudejs';
 
 import styled from 'styled-components';
 import { PauseIconSC, PlayArrowIconSC } from './AudioSC';
@@ -11,6 +11,10 @@ import { useAudioPlayer } from '../../hooks/audio-player-context';
 const Layout = styled.div``;
 
 const MetaContainer = styled.div`
+  width: calc(100% - 48px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   span[data-amplitude-song-info='name'] {
     font-size: 18px;
     color: #fff;
@@ -23,39 +27,36 @@ const MetaContainer = styled.div`
     color: #fff;
     display: block;
   }
+
+  .artist-name,
+  .song-name {
+    white-space: nowrap;
+    position: relative;
+    z-index: 10;
+  }
 `;
 
-const SinglePlayer = ({ trackNFT }) => {
-  const ref = useRef(null);
+const PlayButton = styled.button`
+  width: max-content;
+  position: relative;
+  z-index: 100;
+  background-color: rgb(18, 18, 18);
+`;
+
+const SinglePlayer = ({ trackNFT, amplitudeIndex }) => {
+  const playButtonRef = useRef(null);
+  const containerRef = useRef(null);
+  const songNameRef = useRef(null);
+
+  const [isTitleOverflowing, setIsTitleOverflowing] = useState(false);
   const { audioPlayerState, audioPlayerDispatch } = useAudioPlayer();
   const { isPlaying } = audioPlayerState;
-  console.log(trackNFT);
 
-  const { description } = trackNFT;
-  //   const trackNFT = {
-  //     name: "Risin' High (feat Raashan Ahmad)",
-  //     artist: 'Ancient Astronauts',
-  //     album: 'We Are to Answer',
-  //     url: "https://521dimensions.com/song/Ancient Astronauts - Risin' High (feat Raashan Ahmad).mp3",
-  //     cover_art_url:
-  //       'https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg'
-  //   };
-
-  useEffect(() => {
-    Amplitude.init({
-      bindings: {
-        37: 'prev',
-        39: 'next',
-        32: 'play_pause'
-      },
-      songs: [trackNFT]
-    });
-
-    window.onkeydown = e => !(e.keyCode === 32);
-  }, []);
+  const { description, cover_art_url } = trackNFT;
 
   const onClick = () => {
-    const isTrackPlaying = ref.current?.classList.contains('amplitude-playing');
+    const isTrackPlaying =
+      playButtonRef.current?.classList.contains('amplitude-playing');
 
     audioPlayerDispatch({
       type: 'setIsPlaying',
@@ -63,42 +64,90 @@ const SinglePlayer = ({ trackNFT }) => {
     });
   };
 
+  useEffect(() => {
+    if (songNameRef.current.scrollWidth > songNameRef.current.clientWidth) {
+      console.log('containerRef width', containerRef.current.offsetWidth);
+      console.log('songNameRef width', songNameRef.current.offsetWidth);
+      console.log('songNameRef clientWidth', songNameRef.current.clientWidth);
+      console.log('songNameRef scrollWidth', songNameRef.current.scrollWidth);
+      console.log('titleIsOverflowing');
+      setIsTitleOverflowing(true);
+    }
+  }, []);
+
+  console.log('amplitudeIndex', amplitudeIndex);
+
   return (
     <Layout>
-      <div id="single-song-player">
-        <img data-amplitude-song-info="cover_art_url" alt={description} />
+      <div id="single-song-player" ref={containerRef}>
+        <img
+          data-amplitude-song-info="cover_art_url"
+          alt={description}
+          src={cover_art_url}
+          data-amplitude-song-index={amplitudeIndex}
+        />
         <div className="bottom-container">
           <progress
             className="amplitude-song-played-progress"
+            data-amplitude-song-index={amplitudeIndex}
             id="song-played-progress"
           />
 
           <div className="time-container">
             <span className="current-time">
-              <span className="amplitude-current-minutes" />:
-              <span className="amplitude-current-seconds" />
+              <span
+                className="amplitude-current-minutes"
+                data-amplitude-song-index={amplitudeIndex}
+              />
+              :
+              <span
+                className="amplitude-current-seconds"
+                data-amplitude-song-index={amplitudeIndex}
+              />
             </span>
             <span className="duration">
-              <span className="amplitude-duration-minutes" />:
-              <span className="amplitude-duration-seconds" />
+              <span
+                className="amplitude-duration-minutes"
+                data-amplitude-song-index={amplitudeIndex}
+              />
+              :
+              <span
+                className="amplitude-duration-seconds"
+                data-amplitude-song-index={amplitudeIndex}
+              />
             </span>
           </div>
 
           <div className="control-container">
             <MetaContainer>
-              <span data-amplitude-song-info="name" className="song-name" />
-              <span data-amplitude-song-info="artist" />
+              <div className={isTitleOverflowing ? 'marquee' : ''}>
+                <div>
+                  <span
+                    ref={songNameRef}
+                    className="song-name"
+                    data-amplitude-song-info="name"
+                    data-amplitude-song-index={amplitudeIndex}
+                  />
+                </div>
+              </div>
+
+              <span
+                className="artist-name"
+                data-amplitude-song-info="artist"
+                data-amplitude-song-index={amplitudeIndex}
+              />
             </MetaContainer>
-            <button
+            <PlayButton
               type="button"
-              ref={ref}
+              ref={playButtonRef}
               className="amplitude-play-pause"
+              data-amplitude-song-index={amplitudeIndex}
               id="play-pause"
               onClick={onClick}
               onKeyUp={onClick}
             >
               {isPlaying ? <PauseIconSC /> : <PlayArrowIconSC />}
-            </button>
+            </PlayButton>
           </div>
         </div>
       </div>
@@ -114,7 +163,8 @@ SinglePlayer.propTypes = {
     url: PropTypes.string,
     cover_art_url: PropTypes.string,
     description: PropTypes.string
-  })
+  }),
+  amplitudeIndex: PropTypes.number.isRequired
 };
 
 SinglePlayer.defaultProps = {

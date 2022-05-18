@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import Link from 'next/link';
+import styled from 'styled-components';
 import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core';
 
 import {
@@ -23,6 +24,14 @@ import { useEagerConnect, useInactiveListener } from '../../hooks/connector';
 import { walletconnect, connectorsByName } from '../../connectors/connectors';
 import NetworkSelector from './NetworkSelector';
 import AccountMenu from './AccountMenu';
+
+const AppTitle = styled(Typography)`
+  && {
+    span {
+      color: #01ff95;
+    }
+  }
+`;
 
 function getErrorMessage(error) {
   if (error instanceof NoEthereumProviderError) {
@@ -100,9 +109,9 @@ const Navigation = () => {
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
-            Minted Music
-          </Typography>
+          <AppTitle variant="h6" component="div" sx={{ flexGrow: 0 }}>
+            <span>Minted Music</span>
+          </AppTitle>
           <Box
             sx={{
               flexGrow: 1,

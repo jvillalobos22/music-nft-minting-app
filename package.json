@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "store-asset": "node scripts/store-nft-assets.mjs",
     "lint": "next lint",
     "test:watch": "nodemon --ext js,sol -x 'hardhat test --show-stack-traces'"
   },
@@ -38,6 +39,7 @@
     "hardhat-gas-reporter": "^1.0.8",
     "ipfs-http-client": "^56.0.2",
     "next": "12.1.5",
+    "nft.storage": "^6.2.0",
     "prop-types": "^15.8.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",

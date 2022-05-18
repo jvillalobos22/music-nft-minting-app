@@ -55,7 +55,7 @@ const NetworkBalanceIndicator = ({ className }) => {
   }, [library, account, chainId]);
 
   const balanceDisplay = ethBalance ? getBalanceDisplay(ethBalance) : '0';
-  console.log('balanceDisplay', balanceDisplay);
+
   return (
     <Typography variant="body2" component="p" className={className}>
       {ethBalance === undefined || ethBalance === null

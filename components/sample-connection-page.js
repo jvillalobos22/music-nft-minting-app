@@ -56,7 +56,6 @@ const MyComponent = () => {
   const [activatingConnector, setActivatingConnector] = useState();
 
   useEffect(() => {
-    console.log('running');
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined);
     }
@@ -74,8 +73,8 @@ const MyComponent = () => {
 
   // fetch eth balance of the connected account
   const [ethBalance, setEthBalance] = useState();
+
   useEffect(() => {
-    console.log('running');
     if (library && account) {
       let stale = false;
 
@@ -102,7 +101,6 @@ const MyComponent = () => {
 
   // log the walletconnect URI
   useEffect(() => {
-    console.log('running');
     const logURI = uri => {
       console.log('WalletConnect URI', uri);
     };

@@ -111,6 +111,45 @@ div#single-song-player img[data-amplitude-song-info="cover_art_url"] {
     border-top-left-radius: 10px;
 }
 
+/* marquee scroll animation for long title text */
+.marquee {
+    height: 25px;
+    width: 420px;
+
+    overflow: hidden;
+    position: relative;
+}
+
+.marquee div {
+    display: block;
+    width: 150%;
+    height: 30px;
+
+    position: absolute;
+    overflow: hidden;
+
+    animation: marquee 10s linear infinite;
+}
+
+.marquee span {
+    float: left;
+    width: 50%;
+}
+
+@keyframes marquee {
+    0% {
+        left: 0;
+    }
+
+    40% {
+        left: 0;
+    }
+
+    100% {
+        left: -70%;
+    }
+}
+
 /* RANGE STYLES */
 input[type=range].slider {
     width: 100%;

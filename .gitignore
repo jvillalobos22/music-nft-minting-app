@@ -40,3 +40,8 @@ yarn-error.log*
 /seed-assets
 
 config.js
+config.json
+ 
+# ignore for now but will eventually check in
+deployedContracts.js
+deployedContracts.json

@@ -7,7 +7,7 @@ import Head from 'next/head';
 
 import styles from '../styles/Layout.module.css';
 
-import { nftAddress, mintedMusicAddress } from '../config';
+import { nftAddress, mintedMusicAddress } from '../deployedContracts';
 
 import NFT from '../artifacts/contracts/MusicMakerNFT.sol/MusicMakerNFT.json';
 import MintedMusic from '../artifacts/contracts/MintedMusic.sol/MintedMusic.json';
@@ -86,9 +86,9 @@ const MyTracks = () => {
             ) : (
               <div className="pt-4">
                 <h2 className="text-2xl py-2">NFT Tracks You Created: </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                  {nftTracks.map(trackNFT => (
-                    <TrackListing trackNFT={trackNFT} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-4">
+                  {nftTracks.map((trackNFT, i) => (
+                    <TrackListing trackNFT={trackNFT} amplitudeIndex={i} />
                   ))}
                 </div>
               </div>

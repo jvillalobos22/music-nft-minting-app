@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Web3Modal from 'web3modal';
 import { FileUploader } from 'react-drag-drop-files';
 
-import { nftAddress, mintedMusicAddress } from '../../config';
+import { nftAddress, mintedMusicAddress } from '../../deployedContracts';
 
 import NFT from '../../artifacts/contracts/MusicMakerNFT.sol/MusicMakerNFT.json';
 import MintedMusic from '../../artifacts/contracts/MintedMusic.sol/MintedMusic.json';
@@ -37,14 +37,14 @@ const CreateTrackListing = () => {
     setTrackPreviewURL(URL.createObjectURL(file));
   };
 
-  async function onFilePreview(file, seFileFunc) {
+  async function onFilePreview(file, setFileFunc) {
     try {
       // TODO: use progress receieved to update a progress indicator
       const added = await client.add(file, {
         progress: prog => console.log(`progress received: ${prog}`)
       });
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-      seFileFunc(url);
+      setFileFunc(url);
     } catch (err) {
       console.error(err);
     }

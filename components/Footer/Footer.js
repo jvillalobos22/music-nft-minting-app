@@ -3,13 +3,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Amplitude from 'amplitudejs';
 
-import { PauseIconSC, PlayArrowIconSC } from '../AudioPlayer/AudioSC';
+import {
+  PauseIconSC,
+  PlayArrowIconSC,
+  SkipNextIconSC,
+  SkipPreviousIconSC
+} from '../AudioPlayer/AudioSC';
 import { useAudioPlayer } from '../../hooks/audio-player-context';
 
 const FooterBottom = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-self: flex-end;
   padding: 16px;
 `;
@@ -27,6 +31,7 @@ const FooterSC = styled.footer`
 const FooterLayout = styled.div`
   min-height: 150px;
   width: 100%;
+  background-color: rgb(18, 18, 18);
 `;
 
 const FooterPlayer = styled.div`
@@ -55,11 +60,9 @@ const Footer = () => {
   const [blockNumber, setBlockNumber] = useState();
 
   useEffect(() => {
-    console.log('running');
     if (library) {
       let stale = false;
 
-      console.log('fetching block number!!');
       library
         .getBlockNumber()
         .then(blockNo => {
@@ -96,7 +99,7 @@ const Footer = () => {
   };
 
   const songMeta = Amplitude.getActiveSongMetadata();
-  console.log('songMeta', songMeta);
+  // console.log('songMeta', songMeta);
   const { name, artist } = songMeta;
 
   return (
@@ -105,30 +108,42 @@ const Footer = () => {
       <FooterLayout className="flex flex-no-wrap justify-between">
         <FooterPlayer>
           {songMeta && songMeta.name && (
-            <FooterPlayerControls className="pl-6 pr-6 pt-2 pb-2 control-container">
-              <h6 className="text-xs uppercase tracking-wide">Now Playing:</h6>
-              <span
-                data-amplitude-song-info="name"
-                className="song-name block text-base"
-              >
-                {name}
-              </span>
-              <span
-                data-amplitude-song-info="artist"
-                className="block text-base"
-              >
-                {artist}
-              </span>
-              <button
-                type="button"
-                ref={ref}
-                className="amplitude-play-pause"
-                id="play-pause"
-                onClick={onClick}
-                onKeyUp={onClick}
-              >
-                {isPlaying ? <PauseIconSC /> : <PlayArrowIconSC />}
-              </button>
+            <FooterPlayerControls className="pl-6 pr-6 pt-2 pb-2 control-container flex flex-column justify-center items-center">
+              <div className="flex flex-wrap justify-center items-center">
+                <h6 className="text-xs uppercase tracking-wide">
+                  Now Playing:
+                </h6>
+                <span
+                  data-amplitude-song-info="name"
+                  className="song-name block text-base"
+                >
+                  {name}
+                </span>
+                <span
+                  data-amplitude-song-info="artist"
+                  className="block text-base"
+                >
+                  {artist}
+                </span>
+              </div>
+              <div className="flex flex-column justify-center">
+                <span className="amplitude-prev">
+                  <SkipPreviousIconSC />
+                </span>
+                <button
+                  type="button"
+                  ref={ref}
+                  className="amplitude-play-pause"
+                  id="play-pause"
+                  onClick={onClick}
+                  onKeyUp={onClick}
+                >
+                  {isPlaying ? <PauseIconSC /> : <PlayArrowIconSC />}
+                </button>
+                <span className="amplitude-next">
+                  <SkipNextIconSC />
+                </span>
+              </div>
             </FooterPlayerControls>
           )}
         </FooterPlayer>

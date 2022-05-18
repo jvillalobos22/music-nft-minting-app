@@ -29,10 +29,7 @@ const PolygonIcon = styled.img`
 const changeNetwork = async ({ networkName, setNetworkError }) => {
   try {
     if (!window.ethereum) throw new Error('No crypto wallet found');
-    console.log('networkName', networkName);
-    console.log('SUPPORTED_NETWORK_OBJECTS', SUPPORTED_NETWORK_OBJECTS);
     const params = { ...SUPPORTED_NETWORK_OBJECTS[networkName] };
-    console.log('params', params);
 
     await window.ethereum.request({
       method: 'wallet_addEthereumChain',

@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import dynamic from 'next/dynamic';
+import SinglePlayer from '../AudioPlayer/SinglePlayer';
 
-const SinglePlayerWithNoSSR = dynamic(
-  () => import('../AudioPlayer/SinglePlayer'),
-  { ssr: false }
-);
-
-const TrackListing = ({ trackNFT }) => {
+const TrackListing = ({ trackNFT, amplitudeIndex }) => {
+  // console.log('trackNFT', trackNFT);
   const { name, track, image, description } = trackNFT;
 
   const trackObject = {
@@ -19,7 +15,11 @@ const TrackListing = ({ trackNFT }) => {
     description
   };
 
-  return <SinglePlayerWithNoSSR trackNFT={trackObject} />;
+  console.log('TrackListing', amplitudeIndex);
+
+  return (
+    <SinglePlayer trackNFT={trackObject} amplitudeIndex={amplitudeIndex} />
+  );
 };
 
 // return (
@@ -53,7 +53,8 @@ TrackListing.propTypes = {
     description: PropTypes.string,
     name: PropTypes.string,
     tokenId: PropTypes.number
-  })
+  }),
+  amplitudeIndex: PropTypes.number.isRequired
 };
 
 TrackListing.defaultProps = {

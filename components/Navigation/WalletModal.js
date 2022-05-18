@@ -78,8 +78,6 @@ const WalletModal = ({
   const context = useWeb3React();
   const { connector, activate, error } = context;
 
-  console.log('MetamaskIcon', MetamaskIcon);
-
   return (
     <>
       <Button

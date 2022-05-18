@@ -3,7 +3,8 @@
 }
 
 .main {
-  min-height: calc(100vh - 226px);
+  height: calc(100vh - 226px);
+  overflow-y: scroll;
   flex: 1;
   display: flex;
   flex-direction: row;

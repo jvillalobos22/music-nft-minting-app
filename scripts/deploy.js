@@ -13,9 +13,15 @@ async function main() {
   console.log('nft deployed to:', nft.address);
 
   const config = `export const mintedMusicAddress = '${mintedMusic.address}';\nexport const nftAddress = '${nft.address}';\n`;
-
+  const json = {
+    mintedMusicAddress: mintedMusic.address,
+    nftAddress: nft.address
+  };
   const data = JSON.stringify(config);
-  fs.writeFileSync('config.js', JSON.parse(data));
+  const jsonData = JSON.stringify(json);
+
+  fs.writeFileSync('deployedContracts.js', JSON.parse(data));
+  fs.writeFileSync('deployedContracts.json', jsonData);
 }
 
 main()
