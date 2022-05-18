@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import Amplitude from 'amplitudejs';
-
 import TrackListing from '../TrackListing/TrackListing';
 
 const TrackList = ({ nftTracks }) => {

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+
 import axios from 'axios';
 import Head from 'next/head';
 
@@ -11,10 +12,14 @@ import NFT from '../artifacts/contracts/MusicMakerNFT.sol/MusicMakerNFT.json';
 import MintedMusic from '../artifacts/contracts/MintedMusic.sol/MintedMusic.json';
 import styles from '../styles/Layout.module.css';
 import Navigation from '../components/Navigation/Navigation';
+import Footer from '../components/Footer/Footer';
 
-const FooterWithNoSSR = dynamic(() => import('../components/Footer/Footer'), {
-  ssr: false
-});
+const GlobalPlayerWithNoSSR = dynamic(
+  () => import('../components/AudioPlayer/GlobalPlayer'),
+  {
+    ssr: false
+  }
+);
 
 const TrackListWithNoSSR = dynamic(
   () => import('../components/TrackList/TrackList'),
@@ -89,31 +94,32 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation />
-
-      <main className={styles.main}>
-        <div className={styles.container}>
-          {loadingState === 'loaded' && !nftTracks.length ? (
-            <div className="flex justify-center">
-              <h1 className={styles.title}>
-                There are currently no track NFTs listed. Try adding one!
-              </h1>
-            </div>
-          ) : (
-            <div>
-              <div className="flex justify-start pt-8">
-                <h1 className={styles.title}>Newly Minted Tracks</h1>
+      <div className={styles.app}>
+        <main className={styles.main}>
+          <div className={styles.container}>
+            {loadingState === 'loaded' && !nftTracks.length ? (
+              <div className="flex justify-center">
+                <h1 className={styles.title}>
+                  There are currently no track NFTs listed. Try adding one!
+                </h1>
               </div>
-              <div className="flex justify-center pt-4 pb-16">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <TrackListWithNoSSR nftTracks={nftTracks} />
+            ) : (
+              <div>
+                <div className="flex justify-start pt-8">
+                  <h1 className={styles.title}>Newly Minted Tracks</h1>
+                </div>
+                <div className="flex justify-center pt-4 pb-16">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <TrackListWithNoSSR nftTracks={nftTracks} />
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
-      </main>
-
-      <FooterWithNoSSR />
+            )}
+          </div>
+        </main>
+        <Footer />
+      </div>
+      <GlobalPlayerWithNoSSR />
     </>
   );
 };

@@ -7,7 +7,6 @@
 
 body, p, div, a, li, h1, h2, h3, h4, h5, h6, span, strong {
     font-family: 'Anonymous Pro', sans-serif, monospace;
-    color: #fff;
 }
 
 body {
@@ -20,6 +19,9 @@ div#next {
     height: 100vh;
 }
 
+button { 
+    cursor: pointer;
+}
 /*****************************************************************************/
 /* audio player prototype styles */
 /*
@@ -29,8 +31,6 @@ div#next {
   2. Components
 */
 div.control-container {
-    margin-top: 10px;
-    padding-bottom: 10px;
     display: flex;
     justify-content: space-between;
     padding: 16px;
@@ -163,7 +163,8 @@ input[type=range].slider:focus {
 }
 
 input[type=range].slider::-webkit-slider-runnable-track {
-    background: rgb(18, 18, 18);
+    /* background: rgb(18, 18, 18); */
+    background: rgb(69, 69, 69);
     border: 0;
     width: 100%;
     height: 12px;
@@ -181,11 +182,13 @@ input[type=range].slider::-webkit-slider-thumb {
 }
 
 input[type=range].slider:focus::-webkit-slider-runnable-track {
-    background: rgb(18, 18, 18);
+    /* background: rgb(18, 18, 18); */
+    background: rgb(69, 69, 69);
 }
 
 input[type=range].slider::-moz-range-track {
-    background: rgb(18, 18, 18);
+    /* background: rgb(18, 18, 18); */
+    background: rgb(69, 69, 69);
     border: 0;
     width: 100%;
     height: 12px;
@@ -216,7 +219,8 @@ input[type=range].slider::-ms-fill-lower {
 }
 
 input[type=range].slider::-ms-fill-upper {
-    background: rgb(18, 18, 18);
+    /* background: rgb(18, 18, 18); */
+    background: rgb(69, 69, 69);
     border: 0;
 }
 
@@ -231,11 +235,13 @@ input[type=range].slider::-ms-thumb {
 }
 
 input[type=range].slider:focus::-ms-fill-lower {
-    background: rgb(18, 18, 18);
+    /* background: rgb(18, 18, 18); */
+    background: rgb(69, 69, 69);
 }
 
 input[type=range].slider:focus::-ms-fill-upper {
-    background: rgb(18, 18, 18);
+    /* background: rgb(18, 18, 18); */
+    background: rgb(69, 69, 69);
 }
 
 /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out

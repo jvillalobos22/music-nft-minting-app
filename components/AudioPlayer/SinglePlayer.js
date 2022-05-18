@@ -52,7 +52,9 @@ const SinglePlayer = ({ trackNFT, amplitudeIndex }) => {
   const { audioPlayerState, audioPlayerDispatch } = useAudioPlayer();
   const { isPlaying } = audioPlayerState;
 
-  const { description, cover_art_url } = trackNFT;
+  const { description, image } = trackNFT;
+
+  console.log('trackNFT', trackNFT);
 
   const onClick = () => {
     const isTrackPlaying =
@@ -81,10 +83,10 @@ const SinglePlayer = ({ trackNFT, amplitudeIndex }) => {
     <Layout>
       <div id="single-song-player" ref={containerRef}>
         <img
-          data-amplitude-song-info="cover_art_url"
+          // data-amplitude-song-info="cover_art_url"
           alt={description}
-          src={cover_art_url}
-          data-amplitude-song-index={amplitudeIndex}
+          src={image}
+          // data-amplitude-song-index={amplitudeIndex}
         />
         <div className="bottom-container">
           <progress
@@ -93,7 +95,7 @@ const SinglePlayer = ({ trackNFT, amplitudeIndex }) => {
             id="song-played-progress"
           />
 
-          <div className="time-container">
+          {/* <div className="time-container">
             <span className="current-time">
               <span
                 className="amplitude-current-minutes"
@@ -116,7 +118,7 @@ const SinglePlayer = ({ trackNFT, amplitudeIndex }) => {
                 data-amplitude-song-index={amplitudeIndex}
               />
             </span>
-          </div>
+          </div> */}
 
           <div className="control-container">
             <MetaContainer>
@@ -161,7 +163,7 @@ SinglePlayer.propTypes = {
     artist: PropTypes.string,
     album: PropTypes.string,
     url: PropTypes.string,
-    cover_art_url: PropTypes.string,
+    image: PropTypes.string,
     description: PropTypes.string
   }),
   amplitudeIndex: PropTypes.number.isRequired

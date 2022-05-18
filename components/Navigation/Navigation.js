@@ -25,13 +25,7 @@ import { walletconnect, connectorsByName } from '../../connectors/connectors';
 import NetworkSelector from './NetworkSelector';
 import AccountMenu from './AccountMenu';
 
-const AppTitle = styled(Typography)`
-  && {
-    span {
-      color: #01ff95;
-    }
-  }
-`;
+const AppTitle = styled(Typography)``;
 
 function getErrorMessage(error) {
   if (error instanceof NoEthereumProviderError) {
@@ -109,8 +103,13 @@ const Navigation = () => {
           >
             <MenuIcon />
           </IconButton> */}
-          <AppTitle variant="h6" component="div" sx={{ flexGrow: 0 }}>
-            <span>Minted Music</span>
+          <AppTitle
+            variant="h6"
+            component="div"
+            color="primary"
+            sx={{ flexGrow: 0 }}
+          >
+            Minted Music
           </AppTitle>
           <Box
             sx={{
@@ -120,18 +119,18 @@ const Navigation = () => {
             }}
           >
             <div className="flex ml-8">
-              <Typography variant="body2" color="primary" className="mr-6">
+              <Typography variant="body2" color="white" className="mr-6">
                 <Link href="/" passHref>
                   Listen
                 </Link>
               </Typography>
-              <Typography variant="body2" color="primary" className="mr-6">
+              <Typography variant="body2" color="white" className="mr-6">
                 <Link href="/create-track">Create Track NFT</Link>
               </Typography>
-              <Typography variant="body2" color="primary" className="mr-6">
+              <Typography variant="body2" color="white" className="mr-6">
                 <Link href="/my-tracks">My Tracks</Link>
               </Typography>
-              <Typography variant="body2" color="primary" className="">
+              <Typography variant="body2" color="white" className="">
                 <Link href="/sample-page">Wallet Sample</Link>
               </Typography>
             </div>
